@@ -6,6 +6,7 @@ import 'package:mosquito_idnetifer/Screens/Signup_screen/signupscreen.dart';
 import 'package:mosquito_idnetifer/Widgets/custom_textfield.dart';
 
 import '../../forgot_pw_screen/forgot_pw_screen.dart';
+import 'package:mosquito_idnetifer/Auth/main_page.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -26,9 +27,25 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+
+      // Navigate to the homepage
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
+      // Handle any errors that may have occurred during sign-in
+    }
   }
 
   final _loginKey = GlobalKey<FormState>();

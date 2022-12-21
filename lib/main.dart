@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mosquito_idnetifer/Screens/Home/home_screen.dart';
 import 'Auth/main_page.dart';
 import 'Screens/Welcome/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
+      routes: {
+        '/homepage': (context) => HomeScreen(),
+        // '/welcomepage': (context) => WelcomeScreen(),
+      },
       home: const MainPage(),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:mosquito_idnetifer/Screens/Welcome/welcome_screen.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -17,6 +18,8 @@ class HomeBody extends StatelessWidget {
           MaterialButton(
             onPressed: (() {
               FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => WelcomeScreen()));
             }),
             color: Colors.deepOrange,
             child: Text(
