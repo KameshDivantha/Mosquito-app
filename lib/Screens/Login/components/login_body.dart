@@ -106,13 +106,9 @@ class _LoginBodyState extends State<LoginBody> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return forgotpasswordscreen();
-                            },
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => forgotpasswordscreen()));
                       },
                       child: Text("Forgot Password?",
                           style: TextStyle(
@@ -160,7 +156,12 @@ class _LoginBodyState extends State<LoginBody> {
                         color: Colors.black,
                       )),
                   GestureDetector(
-                    // onTap: ,
+                    onTap: (() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => signupscreen()));
+                    }),
                     child: const Text("Register",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,

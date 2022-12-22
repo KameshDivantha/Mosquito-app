@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mosquito_idnetifer/Screens/Home/home_screen.dart';
+import 'package:mosquito_idnetifer/Screens/Login/login_screen.dart';
 import 'package:mosquito_idnetifer/Screens/Signup_screen/components/signup_body.dart';
 
 import '../../Widgets/custom_textfield.dart';
@@ -27,10 +29,24 @@ class _signupscreenState extends State<signupscreen> {
   }
 
   Future Signup() async {
-    if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
+    try {
+      if (passwordConfirmed()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim());
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
     }
   }
 
@@ -118,7 +134,10 @@ class _signupscreenState extends State<signupscreen> {
                   Text("I'm a member, "),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     child: Text(
                       "Login now",
