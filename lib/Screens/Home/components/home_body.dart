@@ -28,22 +28,31 @@ class HomeBody extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.menu,
-                      size: 40,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.menu,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ),
                     Spacer(),
-                    Icon(
-                      Icons.search,
-                      size: 40,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.search,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ),
                     Spacer(),
-                    Icon(
-                      Icons.settings,
-                      size: 40,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.settings,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     )
                   ],
                 ),
@@ -52,7 +61,7 @@ class HomeBody extends StatelessWidget {
                 height: 180,
               ),
               Icon(
-                Icons.camera,
+                Icons.camera_alt_rounded,
                 size: 100,
               ),
               CustomButton(
@@ -60,6 +69,25 @@ class HomeBody extends StatelessWidget {
                 textColor: Colors.white,
                 onPressed: () {},
                 buttonColor: Colors.blue,
+              ),
+              SizedBox(
+                height: 220,
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  IconButton(
+                      iconSize: 50,
+                      color: Colors.white,
+                      onPressed: (() {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WelcomeScreen()));
+                      }),
+                      icon: Icon(Icons.logout_rounded))
+                ],
               )
             ],
           ),
